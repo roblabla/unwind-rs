@@ -1,4 +1,5 @@
 use libc::{c_void, c_int, c_char};
+#[cfg(feature = "std")]
 use std::ffi::CStr;
 use std::{slice, mem};
 use range::AddrRange;
@@ -51,8 +52,11 @@ extern "C" fn callback(info: *const DlPhdrInfo, size: usize, data: *mut c_void) 
     assert!(size >= mem::size_of::<DlPhdrInfo>());
 
     unsafe {
-        let name = CStr::from_ptr((*info).name);
-        trace!("{:?} at 0x{:x} with {} segments", name, (*info).addr, (*info).phnum);
+        #[cfg(feature = "std")]
+        {
+            let name = CStr::from_ptr((*info).name);
+            trace!("{:?} at 0x{:x} with {} segments", name, (*info).addr, (*info).phnum);
+        }
 
         let phdr = slice::from_raw_parts((*info).phdr, (*info).phnum as usize);
 

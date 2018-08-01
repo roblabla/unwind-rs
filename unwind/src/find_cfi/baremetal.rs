@@ -1,5 +1,7 @@
 use range::AddrRange;
 use super::EhRef;
+#[cfg(not(feature = "std"))]
+use alloc::Vec;
 
 extern "C" {
     static __text_start: usize;

@@ -1,9 +1,19 @@
-#![cfg_attr(feature = "nightly", feature(asm, naked_functions))]
+#![cfg_attr(feature = "nightly", feature(asm, naked_functions, alloc))]
+#![cfg_attr(not(feature = "std"), no_std)]
 
 extern crate gimli;
 extern crate libc;
 extern crate fallible_iterator;
 #[macro_use] extern crate log;
+
+#[cfg(not(feature = "std"))]
+use core as std;
+
+#[cfg(not(feature = "std"))]
+extern crate alloc;
+
+#[cfg(not(feature = "std"))]
+use alloc::Vec;
 
 use gimli::{UnwindSection, UnwindTable, UnwindTableRow, EhFrame, BaseAddresses, UninitializedUnwindContext, Pointer, Reader, CieOrFde, EndianBuf, NativeEndian, CfaRule, RegisterRule, EhFrameHdr, ParsedEhFrameHdr};
 use fallible_iterator::FallibleIterator;
