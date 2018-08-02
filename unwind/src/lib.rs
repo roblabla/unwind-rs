@@ -13,7 +13,7 @@ use core as std;
 extern crate alloc;
 
 #[cfg(not(feature = "std"))]
-use alloc::Vec;
+use alloc::vec::Vec;
 
 use gimli::{UnwindSection, UnwindTable, UnwindTableRow, EhFrame, BaseAddresses, UninitializedUnwindContext, Pointer, Reader, CieOrFde, EndianBuf, NativeEndian, CfaRule, RegisterRule, EhFrameHdr, ParsedEhFrameHdr};
 use fallible_iterator::FallibleIterator;

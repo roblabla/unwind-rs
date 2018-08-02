@@ -4,6 +4,8 @@ use std::ffi::CStr;
 use std::{slice, mem};
 use range::AddrRange;
 use super::EhRef;
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
 
 #[repr(C)]
 struct DlPhdrInfo {
