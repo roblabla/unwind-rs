@@ -1,5 +1,5 @@
 #![cfg_attr(not(feature = "std"), no_std)]
-#![cfg_attr(feature = "nightly", feature(global_asm))]
+#![cfg_attr(feature = "nightly", feature(global_asm, alloc))]
 
 extern crate gimli;
 extern crate libc;
